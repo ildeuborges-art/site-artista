@@ -63,7 +63,10 @@ function listar_series()
     return $series;
 }
 
-/** Lista as imagens de uma série, em ordem natural pelo nome do arquivo. */
+/**
+ * Lista as imagens de uma série. A ordem é a das linhas do legendas.txt;
+ * imagens que não estão no legendas.txt vêm depois, em ordem natural pelo nome do arquivo.
+ */
 function listar_imagens($pasta_serie)
 {
     $dir = PASTA_OBRAS . '/' . $pasta_serie;
@@ -81,7 +84,24 @@ function listar_imagens($pasta_serie)
         }
     }
     natcasesort($arquivos);
-    return array_values($arquivos);
+
+    // Primeiro, as imagens na ordem em que aparecem no legendas.txt
+    $por_chave = array();
+    foreach ($arquivos as $arquivo) {
+        $por_chave[mb_strtolower($arquivo, 'UTF-8')] = $arquivo;
+    }
+    $ordenados = array();
+    foreach (array_keys(ler_legendas($pasta_serie)) as $chave) {
+        if (isset($por_chave[$chave])) {
+            $ordenados[] = $por_chave[$chave];
+            unset($por_chave[$chave]);
+        }
+    }
+    // Depois, as que não têm legenda (continuam em ordem natural)
+    foreach ($por_chave as $arquivo) {
+        $ordenados[] = $arquivo;
+    }
+    return $ordenados;
 }
 
 /** Texto de apresentação da série (arquivo descricao.txt dentro da pasta, opcional). */

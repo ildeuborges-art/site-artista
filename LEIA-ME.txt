@@ -26,7 +26,8 @@ SITE DO ARTISTA — COMO USAR
    - Para criar uma série: crie uma nova pasta em obras/.
    - Ordem das séries: o número no início do nome da pasta (01, 02, 03...).
      Ele não aparece no site. A série 01 é a que abre primeiro.
-   - Ordem das obras: pelo nome do arquivo (01.jpg, 02.jpg, ... 10.jpg).
+   - Ordem das obras: a ordem das linhas no legendas.txt. Imagens que não estão
+     no legendas.txt aparecem depois, pelo nome do arquivo (01.jpg, 02.jpg, ... 10.jpg).
    - Formatos aceitos: JPG, PNG, WEBP e GIF.
    - Tamanho recomendado: lado maior com cerca de 2000 px e arquivo abaixo de 1 MB,
      para a página carregar rápido no celular.

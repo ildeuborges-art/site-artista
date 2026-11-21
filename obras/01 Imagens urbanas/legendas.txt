@@ -5,16 +5,16 @@
 #
 # Exemplo:
 # 01.jpg | Sem título nº 1 | 2025 | Óleo sobre tela | 120 × 90 cm | Coleção Museu X
-10.jpeg | Varredores | óleo sobre tela | 60 x 90cm | 2025
-11.jpeg | Trabalhador | óleo sobre tela | 40 x 60cm | 2025
-12.jpeg | Luz intensa | óleo sobre madeira | 40 x 50cm | 2024 
-13.jpeg | No shopping | óleo sobre tela | 60 x 90cm | 2025
-14.jpeg | Caminho do escola | óleo sobre tela | 30 x 60 cm | 2025
-15.jpeg | Tempo seco | óleo sobre tela | 30 x 60 cm | 2025
-16.jpeg | Fim de semana | óleo sobre tela | 60 x 90 cm | 2024
-17.jpeg | Grávida e amiga | acrílico sobre tela | 80 x 140 cm | 2015
-18.jpeg | Tempo | óleo sobre tela | 50 x 70 cm | 2018
-19.jpeg | Alívio | Acrílico sobre tela | 60 x 70 cm | 2014
-20.jpeg |Caminho de casa | óleo sobre tela | 50 x 50 cm | 2025
-21.jpeg | Estudantes no ponto de ônibus | óleo sobre tela | 70 x 120 cm | 2017
-22.jpeg |Noite | acrílico sobre tela | 80 x 100 cm | 2012
+10.jpeg | Varredores | 2025 | óleo sobre tela | 60 x 90cm
+11.jpeg | Trabalhador | 2025 | óleo sobre tela | 40 x 60cm
+12.jpeg | Luz intensa | 2024 | óleo sobre madeira | 40 x 50cm
+13.jpeg | No shopping | 2025 | óleo sobre tela | 60 x 90cm
+14.jpeg | Caminho do escola | 2025 | óleo sobre tela | 30 x 60 cm
+15.jpeg | Tempo seco | 2025 | óleo sobre tela | 30 x 60 cm
+16.jpeg | Fim de semana | 2024 | óleo sobre tela | 60 x 90 cm
+17.jpeg | Grávida e amiga | 2015 | acrílico sobre tela | 80 x 140 cm
+18.jpeg | Tempo | 2018 | óleo sobre tela | 50 x 70 cm
+19.jpeg | Alívio | 2014 | Acrílico sobre tela | 60 x 70 cm
+20.jpeg | Caminho de casa | 2025 | óleo sobre tela | 50 x 50 cm
+21.jpeg | Estudantes no ponto de ônibus | 2017 | óleo sobre tela | 70 x 120 cm
+22.jpeg | Noite | 2012 | acrílico sobre tela | 80 x 100 cm
