@@ -1,0 +1,46 @@
+SITE DO ARTISTA — COMO USAR
+===========================
+
+1. ANTES DE SUBIR
+   Abra config.php e troque o nome do artista, os e-mails, as galerias e o Instagram.
+   Em sobre.php, troque os parágrafos entre colchetes pelo texto do artista.
+
+2. SUBIR PARA A HOSPEDAGEM
+   Envie todo o conteúdo desta pasta para a pasta pública do domínio
+   (geralmente public_html), pelo gerenciador de arquivos ou por FTP.
+   A hospedagem precisa ter PHP (todos os planos comuns têm).
+
+3. SÉRIES E IMAGENS
+   Cada pasta dentro de obras/ é uma série. O nome da pasta é o nome da série no sub-menu.
+
+     obras/
+       01 Casa de vidro/
+         01.jpg
+         02.jpg
+         descricao.txt   (opcional: texto da série)
+         legendas.txt    (opcional: título, ano, técnica, dimensões de cada imagem)
+       02 Retratos/
+         ...
+
+   - Para incluir uma obra: coloque a imagem na pasta da série. Ela aparece sozinha.
+   - Para criar uma série: crie uma nova pasta em obras/.
+   - Ordem das séries: o número no início do nome da pasta (01, 02, 03...).
+     Ele não aparece no site. A série 01 é a que abre primeiro.
+   - Ordem das obras: pelo nome do arquivo (01.jpg, 02.jpg, ... 10.jpg).
+   - Formatos aceitos: JPG, PNG, WEBP e GIF.
+   - Tamanho recomendado: lado maior com cerca de 2000 px e arquivo abaixo de 1 MB,
+     para a página carregar rápido no celular.
+   - A pasta "01 Primeira série" é um exemplo: renomeie ou apague.
+
+4. IMAGENS OPCIONAIS (pasta imagens/)
+   - imagens/destaque.jpg : imagem da página inicial.
+     Sem ela, o site usa a primeira obra da primeira série.
+   - imagens/retrato.jpg  : foto do artista na página Sobre.
+
+5. CV
+   Coloque o arquivo cv.pdf na pasta principal, e o link aparece na página Sobre.
+
+6. FORMULÁRIO DE CONTATO
+   As mensagens chegam no email_contato do config.php. Esse e-mail deve ser
+   do próprio domínio do site (ex.: contato@seudominio.com.br); muitas hospedagens
+   bloqueiam o envio quando o remetente é de outro domínio, como Gmail.
