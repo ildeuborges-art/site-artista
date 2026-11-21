@@ -1,2 +1,2 @@
-# site_artista
+# site-artista
 Site do artista Ildeu Borges
