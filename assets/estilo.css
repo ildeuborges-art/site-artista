@@ -19,6 +19,8 @@ body {
 a { color: var(--texto); }
 a:hover { color: var(--texto-2); }
 img { max-width: 100%; height: auto; display: block; }
+/* Mostra as imagens sem o brilho extra do HDR (fotos de iPhone), mais fiel às pinturas */
+img { dynamic-range-limit: standard; }
 .oculto {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap;
