@@ -22,7 +22,7 @@ $serie = $series ? $series[$indice] : null;
 if ($serie) {
     $titulo_pagina = $serie['nome'] . ' — Obras';
     $legendas = ler_legendas($serie['pasta']);
-    $obras = [];
+    $obras = array();
     foreach (listar_imagens($serie['pasta']) as $arquivo) {
         $obras[] = dados_obra($serie['pasta'], $arquivo, $legendas);
     }
@@ -39,19 +39,19 @@ require __DIR__ . '/inc/topo.php';
 
   <nav aria-label="Séries" class="submenu">
     <?php foreach ($series as $i => $s): ?>
-      <a href="obras.php?serie=<?= rawurlencode($s['pasta']) ?>"<?= $i === $indice ? ' aria-current="page"' : '' ?>><?= e($s['nome']) ?></a>
+      <a href="obras.php?serie=<?php echo rawurlencode($s['pasta']) ?>"<?php echo $i === $indice ? ' aria-current="page"' : '' ?>><?php echo e($s['nome']) ?></a>
     <?php endforeach; ?>
   </nav>
 
   <?php if ($descricao !== ''): ?>
     <div class="serie-intro">
-      <h2><?= e($serie['nome']) ?></h2>
-      <?php foreach (preg_split('/\R{2,}/', $descricao) as $paragrafo): ?>
-        <p><?= nl2br(e($paragrafo)) ?></p>
+      <h2><?php echo e($serie['nome']) ?></h2>
+      <?php foreach (preg_split('/(?:\r\n|\r|\n){2,}/', $descricao) as $paragrafo): ?>
+        <p><?php echo nl2br(e($paragrafo)) ?></p>
       <?php endforeach; ?>
     </div>
   <?php else: ?>
-    <h2 class="oculto"><?= e($serie['nome']) ?></h2>
+    <h2 class="oculto"><?php echo e($serie['nome']) ?></h2>
   <?php endif; ?>
 
   <?php if (!$obras): ?>
@@ -60,19 +60,19 @@ require __DIR__ . '/inc/topo.php';
     <div class="obras">
       <?php foreach ($obras as $n => $obra): ?>
         <figure class="obra">
-          <a href="<?= $obra['url'] ?>" target="_blank" rel="noopener" class="abrir-visor"
-             <?= $obra['largura_cm'] ? 'data-largura-cm="' . $obra['largura_cm'] . '" data-altura-cm="' . $obra['altura_cm'] . '"' : '' ?>>
-            <img src="<?= $obra['url'] ?>"
-                 alt="<?= e($obra['titulo']) ?>"
-                 <?= $obra['largura'] ? 'width="' . $obra['largura'] . '" height="' . $obra['altura'] . '"' : '' ?>
-                 <?= $n > 0 ? 'loading="lazy"' : '' ?>
+          <a href="<?php echo $obra['url'] ?>" target="_blank" rel="noopener" class="abrir-visor"
+             <?php echo $obra['largura_cm'] ? 'data-largura-cm="' . $obra['largura_cm'] . '" data-altura-cm="' . $obra['altura_cm'] . '"' : '' ?>>
+            <img src="<?php echo $obra['url'] ?>"
+                 alt="<?php echo e($obra['titulo']) ?>"
+                 <?php echo $obra['largura'] ? 'width="' . $obra['largura'] . '" height="' . $obra['altura'] . '"' : '' ?>
+                 <?php echo $n > 0 ? 'loading="lazy"' : '' ?>
                  decoding="async">
           </a>
           <figcaption>
-            <span><em><?= e($obra['titulo']) ?></em><?= $obra['ano'] ? ', ' . e($obra['ano']) : '' ?></span>
-            <?php if ($obra['tecnica']): ?><span><?= e($obra['tecnica']) ?></span><?php endif; ?>
-            <?php if ($obra['medidas']): ?><span><?= e($obra['medidas']) ?></span><?php endif; ?>
-            <?php if ($obra['colecao']): ?><span class="secundario"><?= e($obra['colecao']) ?></span><?php endif; ?>
+            <span><em><?php echo e($obra['titulo']) ?></em><?php echo $obra['ano'] ? ', ' . e($obra['ano']) : '' ?></span>
+            <?php if ($obra['tecnica']): ?><span><?php echo e($obra['tecnica']) ?></span><?php endif; ?>
+            <?php if ($obra['medidas']): ?><span><?php echo e($obra['medidas']) ?></span><?php endif; ?>
+            <?php if ($obra['colecao']): ?><span class="secundario"><?php echo e($obra['colecao']) ?></span><?php endif; ?>
           </figcaption>
         </figure>
       <?php endforeach; ?>

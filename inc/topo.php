@@ -1,10 +1,10 @@
 <?php
 // Espera $titulo_pagina e $pagina_atual ('inicio', 'sobre', 'obras', 'contato').
-$menu = [
-    'sobre'   => ['Sobre', 'sobre.php'],
-    'obras'   => ['Obras', 'obras.php'],
-    'contato' => ['Contato', 'contato.php'],
-];
+$menu = array(
+    'sobre'   => array('Sobre', 'sobre.php'),
+    'obras'   => array('Obras', 'obras.php'),
+    'contato' => array('Contato', 'contato.php'),
+);
 $titulo_completo = $pagina_atual === 'inicio'
     ? $config['nome']
     : $titulo_pagina . ' — ' . $config['nome'];
@@ -14,8 +14,8 @@ $titulo_completo = $pagina_atual === 'inicio'
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><?= e($titulo_completo) ?></title>
-<meta name="description" content="<?= e($config['nome'] . ' — ' . $config['linguagens']) ?>">
+<title><?php echo e($titulo_completo) ?></title>
+<meta name="description" content="<?php echo e($config['nome'] . ' — ' . $config['linguagens']) ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -24,10 +24,10 @@ $titulo_completo = $pagina_atual === 'inicio'
 <body>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
-  <a class="marca" href="./"><?= e($config['nome']) ?></a>
+  <a class="marca" href="./"><?php echo e($config['nome']) ?></a>
   <nav aria-label="Principal" class="menu">
     <?php foreach ($menu as $chave => $item): ?>
-      <a href="<?= $item[1] ?>"<?= $pagina_atual === $chave ? ' aria-current="page"' : '' ?>><?= $item[0] ?></a>
+      <a href="<?php echo $item[1] ?>"<?php echo $pagina_atual === $chave ? ' aria-current="page"' : '' ?>><?php echo $item[0] ?></a>
     <?php endforeach; ?>
   </nav>
 </header>

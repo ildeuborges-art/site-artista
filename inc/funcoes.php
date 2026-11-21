@@ -1,5 +1,11 @@
 <?php
 // Funções do site. Normalmente não é preciso mexer aqui.
+// Compatível com PHP 5.3 ou superior.
+
+// No PHP 5.3, date() gera aviso se o fuso horário não estiver configurado no servidor.
+if (!ini_get('date.timezone')) {
+    date_default_timezone_set('America/Sao_Paulo');
+}
 
 $config = require __DIR__ . '/../config.php';
 
@@ -36,9 +42,9 @@ function nome_exibicao($texto)
 function listar_series()
 {
     if (!is_dir(PASTA_OBRAS)) {
-        return [];
+        return array();
     }
-    $pastas = [];
+    $pastas = array();
     foreach (scandir(PASTA_OBRAS) as $item) {
         if ($item[0] === '.' || !is_dir(PASTA_OBRAS . '/' . $item)) {
             continue;
@@ -47,12 +53,12 @@ function listar_series()
     }
     natcasesort($pastas);
 
-    $series = [];
+    $series = array();
     foreach ($pastas as $pasta) {
-        $series[] = [
+        $series[] = array(
             'pasta' => $pasta,
             'nome'  => nome_exibicao($pasta),
-        ];
+        );
     }
     return $series;
 }
@@ -62,9 +68,9 @@ function listar_imagens($pasta_serie)
 {
     $dir = PASTA_OBRAS . '/' . $pasta_serie;
     if (!is_dir($dir)) {
-        return [];
+        return array();
     }
-    $arquivos = [];
+    $arquivos = array();
     foreach (scandir($dir) as $item) {
         if ($item[0] === '.' || !is_file($dir . '/' . $item)) {
             continue;
@@ -93,7 +99,7 @@ function ler_descricao($pasta_serie)
 function ler_legendas($pasta_serie)
 {
     $arquivo = PASTA_OBRAS . '/' . $pasta_serie . '/legendas.txt';
-    $legendas = [];
+    $legendas = array();
     if (!is_file($arquivo)) {
         return $legendas;
     }
@@ -104,13 +110,13 @@ function ler_legendas($pasta_serie)
         }
         $partes = array_map('trim', explode('|', $linha));
         $chave = mb_strtolower($partes[0], 'UTF-8');
-        $legendas[$chave] = [
+        $legendas[$chave] = array(
             'titulo'   => isset($partes[1]) ? $partes[1] : '',
             'ano'      => isset($partes[2]) ? $partes[2] : '',
             'tecnica'  => isset($partes[3]) ? $partes[3] : '',
             'medidas'  => isset($partes[4]) ? $partes[4] : '',
             'colecao'  => isset($partes[5]) ? $partes[5] : '',
-        ];
+        );
     }
     return $legendas;
 }
@@ -119,7 +125,7 @@ function ler_legendas($pasta_serie)
 function dados_obra($pasta_serie, $arquivo, $legendas)
 {
     $chave = mb_strtolower($arquivo, 'UTF-8');
-    $legenda = isset($legendas[$chave]) ? $legendas[$chave] : [];
+    $legenda = isset($legendas[$chave]) ? $legendas[$chave] : array();
 
     $titulo = !empty($legenda['titulo'])
         ? $legenda['titulo']
@@ -132,7 +138,7 @@ function dados_obra($pasta_serie, $arquivo, $legendas)
     $medidas_px = @getimagesize($caminho);
     $cm = medidas_cm($legenda, $medidas_px);
 
-    return [
+    return array(
         'largura_cm' => $cm ? $cm[0] : null,
         'altura_cm'  => $cm ? $cm[1] : null,
         'url'      => url_caminho('obras/' . $pasta_serie . '/' . $arquivo),
@@ -143,7 +149,7 @@ function dados_obra($pasta_serie, $arquivo, $legendas)
         'colecao'  => isset($legenda['colecao']) ? $legenda['colecao'] : '',
         'largura'  => $medidas_px ? $medidas_px[0] : null,
         'altura'   => $medidas_px ? $medidas_px[1] : null,
-    ];
+    );
 }
 
 /**
@@ -166,12 +172,12 @@ function medidas_cm($legenda, $medidas_px)
         $maior = max($a, $b);
         $menor = min($a, $b);
         if ($medidas_px && $medidas_px[0] < $medidas_px[1]) {
-            return [$menor, $maior]; // foto vertical
+            return array($menor, $maior); // foto vertical
         }
         if ($medidas_px && $medidas_px[0] == $medidas_px[1]) {
-            return [$a, $b];
+            return array($a, $b);
         }
-        return [$maior, $menor]; // foto horizontal (ou sem dados da foto)
+        return array($maior, $menor); // foto horizontal (ou sem dados da foto)
     }
     return null;
 }
@@ -180,7 +186,7 @@ function medidas_cm($legenda, $medidas_px)
 function imagem_opcional($nome_base)
 {
     foreach (extensoes_imagem() as $ext) {
-        foreach ([$ext, strtoupper($ext)] as $variante) {
+        foreach (array($ext, strtoupper($ext)) as $variante) {
             $rel = 'imagens/' . $nome_base . '.' . $variante;
             if (is_file(PASTA_RAIZ . '/' . $rel)) {
                 return $rel;

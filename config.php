@@ -2,7 +2,7 @@
 // ============================================================
 // CONFIGURAÇÃO DO SITE — edite apenas os valores entre aspas
 // ============================================================
-return [
+return array(
     // Nome que aparece no topo, no título das páginas e no rodapé
     'nome' => 'Ildeu Borges',
 
@@ -16,10 +16,10 @@ return [
     'email_imprensa' => '',
 
     // Galerias que representam o artista (deixe [] para não mostrar)
-    'galerias' => [
-        ['nome' => 'Uptime Gallery', 'cidade' => 'São Paulo, SP', 'email' => 'contato@uptimegallery.com'],
-    ],
+    'galerias' => array(
+        array('nome' => 'Uptime Gallery', 'cidade' => 'São Paulo, SP', 'email' => 'contato@uptimegallery.com'),
+    ),
 
     // Link do Instagram (deixe '' para não mostrar)
     'instagram' => 'https://www.instagram.com/borgesildeu',
-];
+);

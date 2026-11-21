@@ -12,7 +12,7 @@ require __DIR__ . '/inc/topo.php';
 <div class="sobre">
   <div class="sobre-foto">
     <?php if ($retrato): ?>
-      <img src="<?= url_caminho($retrato) ?>" alt="Retrato de <?= e($config['nome']) ?>">
+      <img src="<?php echo url_caminho($retrato) ?>" alt="Retrato de <?php echo e($config['nome']) ?>">
     <?php else: ?>
       <div class="espaco-foto">Coloque imagens/retrato.jpg</div>
     <?php endif; ?>
@@ -38,7 +38,7 @@ require __DIR__ . '/inc/topo.php';
       <div class="bloco">
         <h2 class="rotulo">Representação</h2>
         <?php foreach ($config['galerias'] as $g): ?>
-          <span><?= e($g['nome']) ?>, <?= e($g['cidade']) ?></span>
+          <span><?php echo e($g['nome']) ?>, <?php echo e($g['cidade']) ?></span>
         <?php endforeach; ?>
       </div>
     <?php endif; ?>
