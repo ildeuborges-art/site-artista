@@ -29,6 +29,75 @@ function url_caminho($relativo)
     return implode('/', array_map('rawurlencode', explode('/', $relativo)));
 }
 
+/**
+ * Endereço completo do site, terminando com /.
+ * Usa 'url_site' do config.php; se estiver vazio, descobre pelo endereço acessado.
+ */
+function url_base()
+{
+    global $config;
+    if (!empty($config['url_site'])) {
+        return rtrim($config['url_site'], '/') . '/';
+    }
+    $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+        || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
+    $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
+    $host = preg_replace('/[^A-Za-z0-9.:\-\[\]]/', '', $host); // só caracteres válidos de domínio
+    $pasta = isset($_SERVER['SCRIPT_NAME']) ? str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])) : '';
+    return ($https ? 'https' : 'http') . '://' . $host . rtrim($pasta, '/') . '/';
+}
+
+/** Endereço completo a partir de um caminho relativo já codificado (ex.: url_caminho(...)). */
+function url_absoluta($relativo)
+{
+    return url_base() . ltrim($relativo, '/');
+}
+
+/** Resumo de um texto para a descrição da página (corta em palavra inteira). */
+function resumo($texto, $max = 160)
+{
+    $texto = trim(preg_replace('/\s+/u', ' ', $texto));
+    if (mb_strlen($texto, 'UTF-8') <= $max) {
+        return $texto;
+    }
+    $corte = mb_substr($texto, 0, $max - 1, 'UTF-8');
+    $espaco = mb_strrpos($corte, ' ', 0, 'UTF-8');
+    if ($espaco !== false && $espaco > $max * 0.6) {
+        $corte = mb_substr($corte, 0, $espaco, 'UTF-8');
+    }
+    return rtrim($corte, ' ,.;:-–—') . '…';
+}
+
+/** Dados do artista no formato schema.org (usado pelo Google). */
+function dados_artista()
+{
+    global $config;
+    $pessoa = array(
+        '@type'    => 'Person',
+        '@id'      => url_base() . '#artista',
+        'name'     => $config['nome'],
+        'url'      => url_base(),
+        'jobTitle' => $config['profissao'],
+        'description' => $config['descricao'],
+    );
+    $retrato = imagem_opcional('retrato');
+    if ($retrato) {
+        $pessoa['image'] = url_absoluta(url_caminho($retrato));
+    }
+    if (!empty($config['instagram'])) {
+        $pessoa['sameAs'] = array($config['instagram']);
+    }
+    return $pessoa;
+}
+
+/** Imprime um bloco de dados estruturados (JSON-LD). */
+function json_ld($dados)
+{
+    $dados = array_merge(array('@context' => 'https://schema.org'), $dados);
+    return '<script type="application/ld+json">' . json_encode($dados, JSON_HEX_TAG | JSON_HEX_AMP) . '</script>';
+}
+
 /** Remove o número de ordenação do início ("01 ", "02-", "3_") e troca _ por espaço. */
 function nome_exibicao($texto)
 {

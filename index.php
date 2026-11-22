@@ -29,9 +29,30 @@ if ($arquivo_destaque) {
             );
         }
     }
+    // Imagem fixa para a prévia do link (a primeira da série), antes de sortear a ordem
+    $imagem_pagina = $obras_destaque ? $obras_destaque[0]['url'] : '';
     shuffle($obras_destaque);
 }
 $destaque = $obras_destaque ? $obras_destaque[0] : null;
+if ($arquivo_destaque) {
+    $imagem_pagina = $destaque['url'];
+}
+
+// SEO
+$caminho_canonico = '';
+$dados_estruturados = array(
+    array('@graph' => array(
+        array(
+            '@type'      => 'WebSite',
+            '@id'        => url_base() . '#site',
+            'name'       => $config['nome'],
+            'url'        => url_base(),
+            'inLanguage' => 'pt-BR',
+            'author'     => array('@id' => url_base() . '#artista'),
+        ),
+        dados_artista(),
+    )),
+);
 
 require __DIR__ . '/inc/topo.php';
 ?>

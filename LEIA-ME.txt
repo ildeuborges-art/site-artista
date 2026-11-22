@@ -45,3 +45,20 @@ SITE DO ARTISTA — COMO USAR
    As mensagens chegam no email_contato do config.php. Esse e-mail deve ser
    do próprio domínio do site (ex.: contato@seudominio.com.br); muitas hospedagens
    bloqueiam o envio quando o remetente é de outro domínio, como Gmail.
+
+7. GOOGLE E REDES SOCIAIS (SEO)
+   O site já gera sozinho: título e descrição de cada página, prévia com imagem ao
+   compartilhar o link (WhatsApp, Facebook...), dados das obras para o Google
+   (título, ano, técnica, dimensões) e um mapa do site em sitemap.php.
+   - No config.php, ajuste 'descricao' (resumo do site no Google) e 'profissao'.
+   - O endereço oficial é http://ildeu.art.br/ ('url_site' no config.php).
+     O .htaccess leva quem digita www.ildeu.art.br para esse endereço.
+     Envie também os arquivos .htaccess e robots.txt (o .htaccess começa com ponto
+     e fica oculto no Mac: no Finder, Cmd+Shift+. mostra os arquivos ocultos).
+     HTTPS: por enquanto o site usa http://. Quando a hospedagem ativar o
+     certificado SSL, siga as instruções da regra 1 do .htaccess.
+   - A descrição de cada série vem do descricao.txt da pasta. Os títulos das obras
+     vêm do legendas.txt — quanto mais completos, melhor para a busca de imagens.
+   - Uma única vez: cadastre o site no Google Search Console
+     (https://search.google.com/search-console) como propriedade de domínio
+     "ildeu.art.br" e envie o sitemap: http://ildeu.art.br/sitemap.xml

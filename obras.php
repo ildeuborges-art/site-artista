@@ -27,6 +27,50 @@ if ($serie) {
         $obras[] = dados_obra($serie['pasta'], $arquivo, $legendas);
     }
     $descricao = ler_descricao($serie['pasta']);
+
+    // SEO: cada série tem um endereço próprio, com descrição e imagem
+    $caminho_canonico = 'obras.php?serie=' . rawurlencode($serie['pasta']);
+    $descricao_pagina = $descricao !== ''
+        ? $descricao
+        : 'Série ' . $serie['nome'] . ', de ' . $config['nome'] . ': ' . count($obras) . ' obras.';
+    $imagem_pagina = $obras ? $obras[0]['url'] : '';
+
+    $itens = array();
+    foreach ($obras as $n => $obra) {
+        $item = array(
+            '@type'   => 'VisualArtwork',
+            'name'    => $obra['titulo'],
+            'image'   => url_absoluta($obra['url']),
+            'creator' => array('@id' => url_base() . '#artista'),
+            'artform' => 'Pintura',
+        );
+        if (preg_match('/^\d{4}$/', $obra['ano'])) {
+            $item['dateCreated'] = $obra['ano'];
+        }
+        if ($obra['tecnica'] !== '') {
+            $item['artMedium'] = $obra['tecnica'];
+        }
+        if ($obra['largura_cm']) {
+            $item['width']  = array('@type' => 'Distance', 'name' => str_replace('.', ',', $obra['largura_cm']) . ' cm');
+            $item['height'] = array('@type' => 'Distance', 'name' => str_replace('.', ',', $obra['altura_cm']) . ' cm');
+        }
+        $itens[] = array('@type' => 'ListItem', 'position' => $n + 1, 'item' => $item);
+    }
+    $artista = dados_artista();
+    $dados_estruturados = array(
+        array(
+            '@type'      => 'CollectionPage',
+            'name'       => $serie['nome'],
+            'url'        => url_absoluta($caminho_canonico),
+            'inLanguage' => 'pt-BR',
+            'description' => resumo($descricao_pagina, 300),
+            'author'     => array('@id' => $artista['@id']),
+            'mainEntity' => array('@type' => 'ItemList', 'numberOfItems' => count($itens), 'itemListElement' => $itens),
+        ),
+        $artista,
+    );
+} else {
+    $caminho_canonico = 'obras.php';
 }
 
 require __DIR__ . '/inc/topo.php';

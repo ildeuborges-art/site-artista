@@ -4,6 +4,10 @@ require __DIR__ . '/inc/funcoes.php';
 $titulo_pagina = 'Contato';
 $pagina_atual = 'contato';
 
+// SEO
+$descricao_pagina = 'Contato com ' . $config['nome'] . ': aquisição de obras, projetos, convites e parcerias.';
+$caminho_canonico = 'contato.php';
+
 $status = null;   // null | 'ok' | 'erro'
 $campos = array('nome' => '', 'email' => '', 'mensagem' => '');
 

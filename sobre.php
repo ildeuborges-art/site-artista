@@ -7,6 +7,23 @@ $pagina_atual = 'sobre';
 $retrato = imagem_opcional('retrato');           // imagens/retrato.jpg (opcional)
 $tem_cv = is_file(__DIR__ . '/cv.pdf');           // cv.pdf na pasta principal (opcional)
 
+// SEO: resumo que aparece no Google e ao compartilhar o link desta página
+$titulo_pagina = 'Sobre o artista';
+$descricao_pagina = 'Nascido em Brasília em 1971, Ildeu Borges pinta a vida urbana, a figura humana e a arquitetura modernista, com óleo, acrílica e aquarela.';
+$caminho_canonico = 'sobre.php';
+$imagem_pagina = $retrato ? url_caminho($retrato) : '';
+$artista = dados_artista();
+$artista['birthPlace'] = array('@type' => 'Place', 'name' => 'Brasília, DF, Brasil');
+$artista['knowsAbout'] = array('Pintura a óleo', 'Pintura acrílica', 'Aquarela', 'Pastel', 'Abstração geométrica', 'Op Art');
+$dados_estruturados = array(
+    array(
+        '@type'      => 'ProfilePage',
+        'url'        => url_absoluta('sobre.php'),
+        'inLanguage' => 'pt-BR',
+        'mainEntity' => $artista,
+    ),
+);
+
 require __DIR__ . '/inc/topo.php';
 ?>
 <div class="sobre">

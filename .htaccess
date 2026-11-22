@@ -1,0 +1,45 @@
+# Configuração para hospedagem Apache. Não é preciso editar.
+# Endereço oficial: http://ildeu.art.br/ (o mesmo de 'url_site' no config.php)
+
+DirectoryIndex index.php
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# 1) HTTPS — DESATIVADO por enquanto. Quando o certificado SSL estiver ativo na
+#    hospedagem, apague o "# " do início das 4 linhas abaixo, troque http:// por
+#    https:// na regra 2, no config.php ('url_site') e no robots.txt.
+# RewriteCond %{HTTP_HOST} ^(www\.)?ildeu\.art\.br$ [NC]
+# RewriteCond %{HTTPS} !=on
+# RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+# RewriteRule ^ https://ildeu.art.br%{REQUEST_URI} [L,R=301]
+
+# 2) www.ildeu.art.br -> ildeu.art.br (um único endereço para o Google)
+RewriteCond %{HTTP_HOST} ^www\.ildeu\.art\.br$ [NC]
+RewriteRule ^ http://ildeu.art.br%{REQUEST_URI} [L,R=301]
+
+# 3) /index.php -> / (evita página duplicada)
+RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
+RewriteRule ^index\.php$ / [L,R=301]
+
+# 4) Mapa do site também em /sitemap.xml (endereço citado no robots.txt)
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+</IfModule>
+
+# Não mostrar arquivos internos
+<FilesMatch "^(LEIA-ME\.txt|README\.md|\.gitignore|\.DS_Store)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>
+
+# Cache das imagens e estilos (página mais rápida = melhor no Google)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
