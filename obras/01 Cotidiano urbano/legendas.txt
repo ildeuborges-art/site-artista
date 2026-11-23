@@ -5,6 +5,8 @@
 #
 # Exemplo:
 # 01.jpg | Sem título nº 1 | 2025 | Óleo sobre tela | 120 × 90 cm | Coleção Museu X
+vigia.jpeg | Vigia Noturno | 2026 | óleo sobre tela | 40 x 70cm
+pao_de_queijo.jpeg | Casa do Pão de Queijo | 2026 | óleo sobre tela | 50 x 80cm
 10.jpeg | Varredores | 2025 | óleo sobre tela | 60 x 90cm
 11.jpeg | Trabalhador | 2025 | óleo sobre tela | 40 x 60cm
 12.jpeg | Luz intensa | 2024 | óleo sobre madeira | 40 x 50cm
